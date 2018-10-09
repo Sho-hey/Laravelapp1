@@ -33,4 +33,17 @@ class Person extends Model
         parent::boot();
         static::addGlobalScope(new ScopePerson);
     }
+
+    protected $guarded = array("id");
+
+    public static $rules = array(
+        "name" => "required",
+        "mail" => "email",
+        "age" => "integer|min:0|max:150"
+    );
+
+    public function boards()
+    {
+        return $this->hasMany("App\Board");
+    }
 }
